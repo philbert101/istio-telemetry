@@ -512,3 +512,17 @@ spec:
         - name: storage-volume
           emptyDir:
             {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: "nodepool"
+                operator: In
+                values:
+                - md-istio    
+      tolerations:
+        - key: worker
+          operator: Equal
+          value: md-istio
+          effect: NoSchedule         

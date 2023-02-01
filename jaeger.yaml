@@ -53,6 +53,20 @@ spec:
       volumes:
         - name: data
           emptyDir: {}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: "nodepool"
+                operator: In
+                values:
+                - md-istio    
+      tolerations:
+        - key: worker
+          operator: Equal
+          value: md-istio
+          effect: NoSchedule       
 ---
 apiVersion: v1
 kind: Service

@@ -548,4 +548,18 @@ spec:
         configMap:
           name: kiali-cabundle
           optional: true
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: "nodepool"
+                operator: In
+                values:
+                - md-istio    
+      tolerations:
+        - key: worker
+          operator: Equal
+          value: md-istio
+          effect: NoSchedule    
 ...
